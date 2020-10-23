@@ -18,6 +18,7 @@ class NewUserForm extends React.Component {
     const { name } = this.state;
     const { createUser } = this.props;
     createUser({ name });
+    this.setState({ name: '' });
   }
 
   handleNameChange(event) {

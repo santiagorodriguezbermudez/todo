@@ -64,3 +64,17 @@ export const createUserAsync = ({ name }) => (dispatch => {
     console.log(error.message);
   });
 });
+
+export const removeUserAsync = user => (dispatch => {
+  axios({
+    method: 'DELETE',
+    url: `${API_URL}/users/${user.id}`,
+    headers: {
+      Accept: 'application/json',
+    },
+  }).then(() => {
+    dispatch(removeUser(user));
+  }).catch(error => {
+    console.log(error.message);
+  });
+});
