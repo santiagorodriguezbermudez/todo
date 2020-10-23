@@ -1,10 +1,25 @@
 import React from 'react';
+import { createStore, applyMiddleware } from 'redux';
+import { Provider } from 'react-redux';
 import ReactDOM from 'react-dom';
+import thunk from 'redux-thunk';
 import App from './components/App';
+import combinedReducers from './reducers/index';
+import { fetchUsersAsync } from './actions/index';
+
+const store = createStore(combinedReducers, {
+  users: [],
+}, applyMiddleware(thunk));
+
+store.dispatch(fetchUsersAsync());
+
+store.subscribe(() => {
+  console.log('state updated', store.getState());
+});
 
 ReactDOM.render(
-  <React.StrictMode>
+  <Provider store={store}>
     <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+  </Provider>,
+  document.getElementById('root'),
 );
