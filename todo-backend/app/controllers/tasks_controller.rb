@@ -1,7 +1,7 @@
 class TasksController < ApplicationController
   def index
-    tasks = User.find(task_params(:user_id)).all
-    render json: UserSerializer.new(tasks)
+    tasks = Task.find(task_params(:user_id)).all
+    render json: TaskSerializer.new(tasks)
   end
 
   def create
