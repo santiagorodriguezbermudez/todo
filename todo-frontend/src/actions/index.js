@@ -1,12 +1,12 @@
 import axios from 'axios';
-import { v4 as generateId } from 'uuid';
 import API_URL from '../constants/constants';
 
-export const createUser = ({ name }) => ({
+export const createUser = user => ({
   type: 'CREATE_USER',
   user: {
-    name,
-    id: generateId(),
+    name: user.attributes.name,
+    tasks: user.attributes.tasks,
+    id: user.id,
   },
 });
 
@@ -57,8 +57,9 @@ export const createUserAsync = ({ name }) => (dispatch => {
     data: {
       name,
     },
-  }).then(() => {
-    dispatch(createUser({ name }));
+  }).then(response => {
+    console.log(response.data.data);
+    dispatch(createUser(response.data.data));
   }).catch(error => {
     console.log(error.message);
   });

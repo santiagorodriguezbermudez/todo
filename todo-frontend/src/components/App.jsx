@@ -5,12 +5,14 @@ import {
   Route,
 } from 'react-router-dom';
 import UserList from '../containers/UserList';
+import NewUserForm from './NewUserForm';
 
 const App = () => (
   <Router>
     <div>
       <Switch>
         <Route path="/">
+          <NewUserForm />
           <UserList />
         </Route>
       </Switch>

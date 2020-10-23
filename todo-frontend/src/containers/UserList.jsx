@@ -8,13 +8,8 @@ const UserList = ({ userList }) => {
     <User key={user.id} user={user} />
   ));
 
-  const handleCreateUser = () => {
-    
-  }
-
   return (
     <div>
-      <button onClick={handleCreateUser}>Create User</button>
       <div>
         {renderUsers()}
       </div>

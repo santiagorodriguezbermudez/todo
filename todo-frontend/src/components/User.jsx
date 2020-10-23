@@ -7,9 +7,6 @@ const User = ({ user }) => (
       User:
       {` ${user.name}`}
     </h4>
-    <div>
-      
-    </div>
   </div>
 );
 
