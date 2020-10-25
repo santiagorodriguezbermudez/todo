@@ -1,17 +1,15 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { useParams } from 'react-router-dom';
 
-const UserDetail = ({ user }) => (
-  <div>
-    <h1>{user.name}</h1>
-    <ul>
-      {user.tasks}
-    </ul>
-  </div>
-);
+const UserDetail = () => {
+  const { id } = useParams();
 
-UserDetail.propTypes = {
-  user: PropTypes.objectOf(PropTypes.string).isRequired,
+  return (
+    <div>
+      The user id is
+      { id }
+    </div>
+  );
 };
 
 export default UserDetail;

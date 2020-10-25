@@ -7,7 +7,6 @@ import {
 import UserList from '../containers/UserList';
 import NewUserForm from './NewUserForm';
 import UserDetail from './UserDetail';
-import NotFound from './NotFound';
 
 const App = () => (
   <Router>
@@ -17,11 +16,11 @@ const App = () => (
           <NewUserForm />
           <UserList />
         </Route>
-        <Route
-          path="/users/:id"
-          render={props => <UserDetail {...props} />}
-        >
-          <NotFound />
+        <Route path="/users/:id">
+          <UserDetail />
+        </Route>
+        <Route>
+          <span>User not found</span>
         </Route>
       </Switch>
     </div>
