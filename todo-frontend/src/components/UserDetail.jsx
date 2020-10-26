@@ -2,12 +2,19 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useParams } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { selectUserAsync, removeTaskAsync } from '../actions/index';
+import { selectUserAsync, removeTaskAsync, toogleUpdate } from '../actions/index';
 import NewTaskForm from './NewTaskForm';
+import EditUserForm from './EditUserForm';
 
 const UserDetail = props => {
   const { id } = useParams();
-  const { selectUser, user, removeTask } = props;
+  const {
+    selectUser,
+    user,
+    removeTask,
+    visibility,
+    toogleUpdate,
+  } = props;
 
   React.useEffect(() => {
     selectUser(id);
@@ -22,6 +29,14 @@ const UserDetail = props => {
       removeTask(task);
     }
   };
+
+  const toogleHandleKeyDown = e => {
+    if (e.keyCode === 13) {
+      toogleUpdate();
+    }
+  };
+
+  const handleToogleUpdate = () => toogleUpdate();
 
   const renderTasks = () => (
     user.tasks.map(task => (
@@ -40,9 +55,19 @@ const UserDetail = props => {
     ))
   );
 
+  const displayUserName = () => (
+    <h1>
+      {user.name}
+      {' '}
+      <span onClick={() => handleToogleUpdate()} onKeyDown={toogleHandleKeyDown} role="button" tabIndex="0" className="material-icons">
+        edit
+      </span>
+    </h1>
+  );
+
   return (
     <div>
-      <h1>{ user.name }</h1>
+      {visibility ? <EditUserForm /> : displayUserName() }
       <NewTaskForm />
       { user.tasks ? renderTasks() : null }
     </div>
@@ -59,11 +84,14 @@ UserDetail.propTypes = {
   selectUser: PropTypes.func.isRequired,
   user: PropTypes.shape(userItemShape).isRequired,
   removeTask: PropTypes.func.isRequired,
+  visibility: PropTypes.bool.isRequired,
+  toogleUpdate: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => (
   {
     user: state.user,
+    visibility: state.visibility,
   }
 );
 
@@ -73,6 +101,9 @@ const mapDispatchToProps = dispatch => ({
   },
   removeTask: taskId => {
     dispatch(removeTaskAsync(taskId));
+  },
+  toogleUpdate: () => {
+    dispatch(toogleUpdate());
   },
 });
 

@@ -40,6 +40,10 @@ export const removeTask = task => ({
   task,
 });
 
+export const toogleUpdate = () => ({
+  type: 'TOOGLE',
+});
+
 export const fetchUsersAsync = () => (
   dispatch => {
     axios({
@@ -133,6 +137,24 @@ export const removeTaskAsync = task => (dispatch => {
     },
   }).then(() => {
     dispatch(removeTask(task));
+  }).catch(error => {
+    console.log(error.message);
+  });
+});
+
+export const editUserAsync = ({ name, userId }) => (dispatch => {
+  axios({
+    method: 'PATCH',
+    url: `${API_URL}/users/${userId}`,
+    headers: {
+      Accept: 'application/json',
+    },
+    data: {
+      name,
+    },
+  }).then(response => {
+    dispatch(showUser(response.data.data));
+    dispatch(toogleUpdate());
   }).catch(error => {
     console.log(error.message);
   });

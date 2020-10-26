@@ -15,11 +15,14 @@ const User = props => {
     <div>
       <Link to={`/users/${user.id}`}>
         <h4 style={{ display: 'inline-block', marginRight: '4rem' }}>
-          User:
           {` ${user.name}`}
         </h4>
       </Link>
-      <button type="button" onClick={handleDeleteClick}>Remove user</button>
+      <button type="button" onClick={handleDeleteClick}>
+        <span className="material-icons">
+          delete
+        </span>
+      </button>
     </div>
   );
 };
