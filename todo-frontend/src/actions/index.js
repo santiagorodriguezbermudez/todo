@@ -57,10 +57,7 @@ export const fetchUsersAsync = () => (
         Accept: 'application/json',
       },
     }).then(response => {
-      console.log(response);
       dispatch(setUsers(response.data.data));
-    }).catch(error => {
-      console.log(`This is the error: ${error}`);
     });
   }
 );
@@ -76,10 +73,7 @@ export const createUserAsync = ({ name }) => (dispatch => {
       name,
     },
   }).then(response => {
-    console.log(response.data.data);
     dispatch(createUser(response.data.data));
-  }).catch(error => {
-    console.log(error.message);
   });
 });
 
@@ -92,8 +86,6 @@ export const removeUserAsync = user => (dispatch => {
     },
   }).then(() => {
     dispatch(removeUser(user));
-  }).catch(error => {
-    console.log(error.message);
   });
 });
 
@@ -107,8 +99,6 @@ export const selectUserAsync = id => (dispatch => {
   }).then(response => {
     dispatch(showUser(response.data.data));
     dispatch(hideUpdate());
-  }).catch(error => {
-    console.log(error.message);
   });
 });
 
@@ -125,11 +115,7 @@ export const createTaskAsync = ({ description, userId }) => (dispatch => {
       state: 0,
     },
   }).then(response => {
-    console.log('This is the response from creating a new task:');
-    console.log(response.data.data);
     dispatch(addTask(response.data.data));
-  }).catch(error => {
-    console.log(error.message);
   });
 });
 
@@ -142,8 +128,6 @@ export const removeTaskAsync = task => (dispatch => {
     },
   }).then(() => {
     dispatch(removeTask(task));
-  }).catch(error => {
-    console.log(error.message);
   });
 });
 
@@ -160,7 +144,5 @@ export const editUserAsync = ({ name, userId }) => (dispatch => {
   }).then(response => {
     dispatch(showUser(response.data.data));
     dispatch(toogleUpdate());
-  }).catch(error => {
-    console.log(error.message);
   });
 });

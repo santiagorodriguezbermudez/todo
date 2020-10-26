@@ -13,10 +13,6 @@ const store = createStore(combinedReducers, {
 
 store.dispatch(fetchUsersAsync());
 
-store.subscribe(() => {
-  console.log('state updated', store.getState());
-});
-
 ReactDOM.render(
   <Provider store={store}>
     <App />
