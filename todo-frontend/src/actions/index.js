@@ -78,3 +78,17 @@ export const removeUserAsync = user => (dispatch => {
     console.log(error.message);
   });
 });
+
+export const selectUserAsync = id => (dispatch => {
+  axios({
+    method: 'GET',
+    url: `${API_URL}/users/${id}`,
+    headers: {
+      Accept: 'application/json',
+    },
+  }).then(response => {
+    dispatch(showUser(response.data.data));
+  }).catch(error => {
+    console.log(error.message);
+  });
+});
