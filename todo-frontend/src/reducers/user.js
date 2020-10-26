@@ -18,6 +18,18 @@ const user = (state = {}, action) => {
           },
         ],
       };
+    case 'REMOVE_TASK':
+      console.log('THIS IS THE ACTION FOR DELETE');
+      console.log(action);
+      console.log('THIS IS THE STATE FOR DELETE');
+      console.log(state);
+      return {
+        ...state,
+        tasks: [
+          ...state.tasks.slice(0, state.tasks.indexOf(action.task)),
+          ...state.tasks.slice(state.tasks.indexOf(action.task) + 1),
+        ],
+      };
     default:
       return state;
   }

@@ -35,6 +35,11 @@ export const addTask = data => ({
   data,
 });
 
+export const removeTask = task => ({
+  type: 'REMOVE_TASK',
+  task,
+});
+
 export const fetchUsersAsync = () => (
   dispatch => {
     axios({
@@ -114,6 +119,20 @@ export const createTaskAsync = ({ description, userId }) => (dispatch => {
     console.log('This is the response from creating a new task:');
     console.log(response.data.data);
     dispatch(addTask(response.data.data));
+  }).catch(error => {
+    console.log(error.message);
+  });
+});
+
+export const removeTaskAsync = task => (dispatch => {
+  axios({
+    method: 'DELETE',
+    url: `${API_URL}/tasks/${task.id}`,
+    headers: {
+      Accept: 'application/json',
+    },
+  }).then(() => {
+    dispatch(removeTask(task));
   }).catch(error => {
     console.log(error.message);
   });
