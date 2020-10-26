@@ -24,8 +24,14 @@ const User = props => {
   );
 };
 
+const userItemShape = {
+  id: PropTypes.string,
+  name: PropTypes.string,
+  tasks: PropTypes.array,
+};
+
 User.propTypes = {
-  user: PropTypes.objectOf(PropTypes.string).isRequired,
+  user: PropTypes.shape(userItemShape).isRequired,
   deleteUser: PropTypes.func.isRequired,
 };
 

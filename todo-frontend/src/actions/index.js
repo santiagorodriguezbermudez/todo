@@ -30,6 +30,11 @@ export const showUser = user => ({
   user,
 });
 
+export const addTask = data => ({
+  type: 'ADD_TASK',
+  data,
+});
+
 export const fetchUsersAsync = () => (
   dispatch => {
     axios({
@@ -88,6 +93,27 @@ export const selectUserAsync = id => (dispatch => {
     },
   }).then(response => {
     dispatch(showUser(response.data.data));
+  }).catch(error => {
+    console.log(error.message);
+  });
+});
+
+export const createTaskAsync = ({ description, userId }) => (dispatch => {
+  axios({
+    method: 'POST',
+    url: `${API_URL}/tasks`,
+    headers: {
+      Accept: 'application/json',
+    },
+    data: {
+      description,
+      user_id: userId,
+      state: 0,
+    },
+  }).then(response => {
+    console.log('This is the response from creating a new task:');
+    console.log(response.data.data);
+    dispatch(addTask(response.data.data));
   }).catch(error => {
     console.log(error.message);
   });

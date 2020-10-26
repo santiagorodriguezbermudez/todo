@@ -16,12 +16,6 @@ const users = (state = [], action) => {
         ...state.slice(0, state.indexOf(action.user)),
         ...state.slice(state.indexOf(action.user) + 1),
       ];
-    case 'SHOW_USER':
-      return {
-        id: action.user.id,
-        name: action.user.attributes.name,
-        tasks: action.user.attributes.tasks,
-      };
     default:
       return state;
   }
