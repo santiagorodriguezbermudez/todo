@@ -44,6 +44,10 @@ export const toogleUpdate = () => ({
   type: 'TOOGLE',
 });
 
+export const hideUpdate = () => ({
+  type: 'HIDE',
+});
+
 export const fetchUsersAsync = () => (
   dispatch => {
     axios({
@@ -102,6 +106,7 @@ export const selectUserAsync = id => (dispatch => {
     },
   }).then(response => {
     dispatch(showUser(response.data.data));
+    dispatch(hideUpdate());
   }).catch(error => {
     console.log(error.message);
   });
