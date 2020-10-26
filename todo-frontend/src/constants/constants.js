@@ -1,3 +1,3 @@
-const API_URL = 'https://2cbb11df7456.ngrok.io';
+const API_URL = 'https://radiant-oasis-80715.herokuapp.com/';
 
 export default API_URL;
